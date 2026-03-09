@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Estágios em TI — Manaus/AM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #080c14;
+  --surface: #0e1420;
+  --card: #121a28;
+  --card-hover: #162030;
+  --border: #1a2540;
+  --border-light: #243050;
+  --accent: #00d4ff;
+  --accent-glow: rgba(0,212,255,0.15);
+  --accent2: #6d28d9;
+  --green: #10b981;
+  --yellow: #f59e0b;
+  --red: #f43f5e;
+  --text: #e2e8f0;
+  --text-muted: #64748b;
+  --text-soft: #94a3b8;
+  --radius: 12px;
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+[data-theme="light"] {
+  --bg: #f0f5ff;
+  --surface: #ffffff;
+  --card: #f8fbff;
+  --card-hover: #eef4ff;
+  --border: #dbe8ff;
+  --border-light: #c8dcff;
+  --accent: #0066cc;
+  --accent-glow: rgba(0,102,204,0.1);
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --text-soft: #475569;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-display);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+
+/* HEADER */
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 1rem;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.logo-text {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+.logo-text span { color: var(--accent); }
+.header-actions { display: flex; align-items: center; gap: 0.75rem; }
+.btn-icon {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text-soft);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+.btn-icon:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+.btn-refresh {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 14px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent-glow);
+  color: var(--accent);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-refresh:hover { background: var(--accent); color: var(--bg); }
+.btn-refresh:disabled { opacity: 0.5; cursor: not-allowed; }
+.spin { animation: spin 1s linear infinite; display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* HERO */
+.hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 1.5rem;
+}
+.hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+.hero h1 .highlight {
+  background: linear-gradient(90deg, var(--accent), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+.badge-green { background: rgba(16,185,129,0.12); color: var(--green); border: 1px solid rgba(16,185,129,0.25); }
+.badge-blue  { background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(0,212,255,0.25); }
+.badge-yellow { background: rgba(245,158,11,0.12); color: var(--yellow); border: 1px solid rgba(245,158,11,0.25); }
+
+/* STATS */
+.stats-bar {
+  max-width: 1200px;
+  margin: 0 auto 1.5rem;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  transition: all 0.2s;
+}
+.stat-card:hover { border-color: var(--border-light); background: var(--card-hover); }
+.stat-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.stat-value { font-size: 1.8rem; font-weight: 800; color: var(--text); font-family: var(--font-mono); line-height: 1; }
+.stat-value.accent { color: var(--accent); }
+.stat-value.green { color: var(--green); }
+.stat-value.yellow { color: var(--yellow); }
+
+/* FILTERS */
+.filters-wrap {
+  max-width: 1200px;
+  margin: 0 auto 1.5rem;
+  padding: 0 2rem;
+}
+.filters-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.filter-group { display: flex; flex-direction: column; gap: 4px; }
+.filter-label { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+select, input[type="text"] {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 8px 12px;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+select { padding-right: 32px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+select:focus, input[type="text"]:focus { outline: none; border-color: var(--accent); }
+input[type="text"] { min-width: 220px; }
+.filter-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text-soft);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.results-info {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.btn-clear {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: var(--font-display);
+  transition: opacity 0.2s;
+}
+.btn-clear:hover { opacity: 0.7; }
+
+/* LOADING */
+.loading-state {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+  text-align: center;
+  display: none;
+}
+.loading-state.show { display: block; }
+.loading-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+.dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
+.dot:nth-child(2) { animation-delay: 0.2s; background: #a78bfa; }
+.dot:nth-child(3) { animation-delay: 0.4s; background: var(--green); }
+@keyframes pulse-dot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+.loading-text { color: var(--text-soft); font-size: 0.95rem; }
+.loading-steps { margin-top: 1rem; display: flex; flex-direction: column; gap: 6px; }
+.step { font-size: 0.82rem; color: var(--text-muted); font-family: var(--font-mono); }
+.step.done { color: var(--green); }
+.step.active { color: var(--accent); }
+
+/* ERROR */
+.error-state {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: rgba(244,63,94,0.08);
+  border: 1px solid rgba(244,63,94,0.25);
+  border-radius: var(--radius);
+  color: #fda4af;
+  font-size: 0.9rem;
+  display: none;
+  text-align: center;
+}
+.error-state.show { display: block; }
+
+/* GRID */
+.vagas-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1rem;
+}
+.empty-state {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+.empty-state .emoji { font-size: 3rem; display: block; margin-bottom: 1rem; }
+
+/* VAGA CARD */
+.vaga-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  transition: all 0.2s;
+  cursor: default;
+  animation: fadeInUp 0.4s ease both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.vaga-card:hover { border-color: var(--border-light); background: var(--card-hover); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.card-titulo {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text);
+  flex: 1;
+}
+.modal-badge {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+.modal-presencial { background: rgba(16,185,129,0.12); color: var(--green); }
+.modal-remoto { background: rgba(0,212,255,0.12); color: var(--accent); }
+.modal-hibrido { background: rgba(245,158,11,0.12); color: var(--yellow); }
+
+.card-empresa {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.empresa-avatar {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+}
+.empresa-info { flex: 1; min-width: 0; }
+.empresa-nome { font-size: 0.85rem; font-weight: 600; color: var(--text-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.empresa-local { font-size: 0.75rem; color: var(--text-muted); }
+
+.card-desc {
+  font-size: 0.83rem;
+  color: var(--text-soft);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-reqs { display: flex; flex-wrap: wrap; gap: 5px; }
+.req-tag {
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: rgba(109,40,217,0.12);
+  color: #a78bfa;
+  border: 1px solid rgba(109,40,217,0.2);
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.fonte-badge {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.card-actions { display: flex; gap: 6px; }
+.btn-vaga {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.btn-ver { background: var(--accent-glow); color: var(--accent); border-color: rgba(0,212,255,0.3); }
+.btn-ver:hover { background: var(--accent); color: var(--bg); }
+.btn-whatsapp { background: rgba(37,211,102,0.1); color: #25d366; border-color: rgba(37,211,102,0.25); }
+.btn-whatsapp:hover { background: #25d366; color: white; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  header { padding: 0 1rem; }
+  .hero, .stats-bar, .filters-wrap, .vagas-grid { padding-left: 1rem; padding-right: 1rem; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .vagas-grid { grid-template-columns: 1fr; }
+  .logo-text { display: none; }
+  input[type="text"] { min-width: 140px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">💻</div>
+      <span class="logo-text">Estágios TI <span>Manaus</span></span>
+    </a>
+    <div class="header-actions">
+      <button class="btn-icon" id="btnTheme" title="Alternar tema" onclick="toggleTheme()">🌙</button>
+      <button class="btn-refresh" id="btnRefresh" onclick="buscarVagas()">
+        <span id="refreshIcon">🔍</span>
+        <span id="refreshText">Atualizar</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Vagas de Estágio em <span class="highlight">TI & Computação</span></h1>
+  <div class="hero-sub">
+    <span>📍 Manaus, AM</span>
+    <span class="badge badge-green" id="statusBadge">● Atualizado hoje</span>
+    <span class="badge badge-blue" id="totalBadge">— vagas</span>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card">
+    <div class="stat-label">Total de Vagas</div>
+    <div class="stat-value accent" id="statTotal">—</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Empresas</div>
+    <div class="stat-value" id="statEmpresas">—</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Presenciais</div>
+    <div class="stat-value green" id="statPresencial">—</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Remotas</div>
+    <div class="stat-value yellow" id="statRemoto">—</div>
+  </div>
+</div>
+
+<div class="filters-wrap">
+  <div class="filters-row">
+    <div class="filter-group">
+      <span class="filter-label">Pesquisar</span>
+      <input type="text" id="searchInput" placeholder="Buscar por título, empresa..." oninput="aplicarFiltros()"/>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Modalidade</span>
+      <select id="filterModal" onchange="aplicarFiltros()">
+        <option value="">Todas</option>
+        <option value="Presencial">Presencial</option>
+        <option value="Remoto">Remoto</option>
+        <option value="Híbrido">Híbrido</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Fonte</span>
+      <select id="filterFonte" onchange="aplicarFiltros()">
+        <option value="">Todas as fontes</option>
+      </select>
+    </div>
+  </div>
+
+  <div style="margin-top:0.875rem;">
+    <div class="filter-label" style="margin-bottom:6px;">Área</div>
+    <div class="filter-chips" id="areaChips">
+      <div class="chip active" data-area="" onclick="selectArea(this)">Todas</div>
+      <div class="chip" data-area="Desenvolvimento" onclick="selectArea(this)">Desenvolvimento</div>
+      <div class="chip" data-area="Testes" onclick="selectArea(this)">Testes</div>
+      <div class="chip" data-area="Infraestrutura" onclick="selectArea(this)">Infraestrutura</div>
+      <div class="chip" data-area="Design/UX" onclick="selectArea(this)">Design/UX</div>
+      <div class="chip" data-area="Dados" onclick="selectArea(this)">Dados</div>
+      <div class="chip" data-area="Suporte" onclick="selectArea(this)">Suporte</div>
+      <div class="chip" data-area="Pesquisa" onclick="selectArea(this)">Pesquisa</div>
+    </div>
+  </div>
+
+  <div class="results-info">
+    <span id="resultsCount"></span>
+    <button class="btn-clear" onclick="limparFiltros()">Limpar filtros</button>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div class="loading-state" id="loadingState">
+  <div class="loading-animation">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+  <div class="loading-text">🤖 IA pesquisando vagas em tempo real...</div>
+  <div class="loading-steps" id="loadingSteps">
+    <div class="step active" id="step1">⏳ Conectando ao Google Search...</div>
+    <div class="step" id="step2">⏳ Buscando no LinkedIn, Indeed, CIEE...</div>
+    <div class="step" id="step3">⏳ Processando e organizando resultados...</div>
+  </div>
+</div>
+
+<!-- ERROR -->
+<div class="error-state" id="errorState">
+  <div style="font-size:2rem;margin-bottom:0.5rem">⚠️</div>
+  <div id="errorMsg"></div>
+</div>
+
+<!-- GRID -->
+<div class="vagas-grid" id="vagasGrid"></div>
+
+<footer>
+  <p>Dados coletados via IA com Google Search • Atualizado automaticamente ao abrir a página</p>
+  <p style="margin-top:4px">Feito com ❤️ para estudantes de TI em Manaus • <span id="footerData"></span></p>
+</footer>
+
+<script>
+let todasVagas = [];
+let areaAtiva = '';
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('btnTheme').textContent = isDark ? '🌙' : '☀️';
+}
+
+function selectArea(el) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  areaAtiva = el.dataset.area;
+  aplicarFiltros();
+}
+
+function aplicarFiltros() {
+  const busca = document.getElementById('searchInput').value.toLowerCase();
+  const modal = document.getElementById('filterModal').value;
+  const fonte = document.getElementById('filterFonte').value;
+
+  const filtradas = todasVagas.filter(v => {
+    const matchBusca = !busca ||
+      v.titulo.toLowerCase().includes(busca) ||
+      v.empresa.toLowerCase().includes(busca) ||
+      (v.descricao || '').toLowerCase().includes(busca);
+    const matchModal = !modal || v.modalidade === modal;
+    const matchFonte = !fonte || v.fonte === fonte;
+    const matchArea = !areaAtiva || v.area === areaAtiva;
+    return matchBusca && matchModal && matchFonte && matchArea;
+  });
+
+  renderVagas(filtradas);
+  document.getElementById('resultsCount').textContent =
+    `${filtradas.length} vaga${filtradas.length !== 1 ? 's' : ''} encontrada${filtradas.length !== 1 ? 's' : ''}`;
+}
+
+function limparFiltros() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('filterModal').value = '';
+  document.getElementById('filterFonte').value = '';
+  areaAtiva = '';
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  document.querySelector('.chip[data-area=""]').classList.add('active');
+  aplicarFiltros();
+}
+
+function renderVagas(vagas) {
+  const grid = document.getElementById('vagasGrid');
+  if (!vagas.length) {
+    grid.innerHTML = `<div class="empty-state"><span class="emoji">🔎</span>Nenhuma vaga encontrada com esses filtros.</div>`;
+    return;
+  }
+  grid.innerHTML = vagas.map((v, i) => {
+    const modalClass = {
+      'Presencial': 'modal-presencial',
+      'Remoto': 'modal-remoto',
+      'Híbrido': 'modal-hibrido'
+    }[v.modalidade] || 'modal-presencial';
+
+    const inicial = (v.empresa || '?')[0].toUpperCase();
+    const reqs = (v.requisitos || []).slice(0, 3).map(r =>
+      `<span class="req-tag">${r}</span>`).join('');
+
+    const linkVer = v.link
+      ? `<a href="${v.link}" target="_blank" rel="noopener" class="btn-vaga btn-ver">🔗 Ver vaga</a>`
+      : '';
+
+    const msgWA = encodeURIComponent(
+      `🎓 *Vaga de Estágio em TI - Manaus*\n\n*${v.titulo}*\n🏢 ${v.empresa}\n📍 ${v.local || 'Manaus, AM'}\n🖥️ ${v.modalidade}\n\n${v.descricao || ''}\n\n${v.link ? '🔗 ' + v.link : ''}`
+    );
+    const btnWA = `<a href="https://wa.me/?text=${msgWA}" target="_blank" class="btn-vaga btn-whatsapp">📲 Compartilhar</a>`;
+
+    return `
+    <div class="vaga-card" style="animation-delay:${i * 0.05}s">
+      <div class="card-header">
+        <div class="card-titulo">${v.titulo}</div>
+        <span class="modal-badge ${modalClass}">${v.modalidade || 'Presencial'}</span>
+      </div>
+      <div class="card-empresa">
+        <div class="empresa-avatar">${inicial}</div>
+        <div class="empresa-info">
+          <div class="empresa-nome">${v.empresa}</div>
+          <div class="empresa-local">📍 ${v.local || 'Manaus, AM'}</div>
+        </div>
+      </div>
+      ${v.descricao ? `<div class="card-desc">${v.descricao}</div>` : ''}
+      ${reqs ? `<div class="card-reqs">${reqs}</div>` : ''}
+      <div class="card-footer">
+        <span class="fonte-badge">📌 ${v.fonte || 'Web'} ${v.data_publicacao ? '· ' + v.data_publicacao : ''}</span>
+        <div class="card-actions">${linkVer}${btnWA}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function atualizarStats(vagas) {
+  document.getElementById('statTotal').textContent = vagas.length;
+  document.getElementById('statEmpresas').textContent = new Set(vagas.map(v => v.empresa)).size;
+  document.getElementById('statPresencial').textContent = vagas.filter(v => v.modalidade === 'Presencial').length;
+  document.getElementById('statRemoto').textContent = vagas.filter(v => v.modalidade === 'Remoto').length;
+  document.getElementById('totalBadge').textContent = `${vagas.length} vagas ativas`;
+
+  // Populate source filter
+  const fontes = [...new Set(vagas.map(v => v.fonte).filter(Boolean))];
+  const sel = document.getElementById('filterFonte');
+  sel.innerHTML = '<option value="">Todas as fontes</option>' +
+    fontes.map(f => `<option value="${f}">${f}</option>`).join('');
+}
+
+async function animateSteps() {
+  const steps = ['step1', 'step2', 'step3'];
+  for (let i = 0; i < steps.length; i++) {
+    await new Promise(r => setTimeout(r, 1200));
+    document.getElementById(steps[i]).classList.remove('active');
+    document.getElementById(steps[i]).classList.add('done');
+    document.getElementById(steps[i]).textContent = '✅ ' + document.getElementById(steps[i]).textContent.replace('⏳ ', '');
+    if (i + 1 < steps.length) {
+      document.getElementById(steps[i + 1]).classList.add('active');
+    }
+  }
+}
+
+async function buscarVagas() {
+  const btn = document.getElementById('btnRefresh');
+  const icon = document.getElementById('refreshIcon');
+  const txt = document.getElementById('refreshText');
+
+  btn.disabled = true;
+  icon.className = 'spin';
+  icon.textContent = '⏳';
+  txt.textContent = 'Buscando...';
+
+  // Reset steps
+  ['step1','step2','step3'].forEach(s => {
+    const el = document.getElementById(s);
+    el.className = 'step';
+  });
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('step1').textContent = '⏳ Conectando ao Google Search...';
+  document.getElementById('step2').textContent = '⏳ Buscando no LinkedIn, Indeed, CIEE...';
+  document.getElementById('step3').textContent = '⏳ Processando e organizando resultados...';
+
+  document.getElementById('loadingState').classList.add('show');
+  document.getElementById('errorState').classList.remove('show');
+  document.getElementById('vagasGrid').innerHTML = '';
+  document.getElementById('statTotal').textContent = '—';
+  document.getElementById('statEmpresas').textContent = '—';
+  document.getElementById('statPresencial').textContent = '—';
+  document.getElementById('statRemoto').textContent = '—';
+
+  animateSteps();
+
+  try {
+    const res = await fetch('/.netlify/functions/buscar-vagas');
+    const data = await res.json();
+
+    if (data.error) throw new Error(data.error);
+
+    todasVagas = data.vagas || [];
+    atualizarStats(todasVagas);
+    aplicarFiltros();
+
+    document.getElementById('statusBadge').textContent = `● Atualizado ${data.data_atualizacao || 'hoje'}`;
+  } catch (err) {
+    document.getElementById('errorState').classList.add('show');
+    document.getElementById('errorMsg').textContent =
+      `Erro ao buscar vagas: ${err.message}. Verifique se a GEMINI_API_KEY está configurada no Netlify.`;
+  } finally {
+    document.getElementById('loadingState').classList.remove('show');
+    btn.disabled = false;
+    icon.className = '';
+    icon.textContent = '🔍';
+    txt.textContent = 'Atualizar';
+  }
+}
+
+// Init
+document.getElementById('footerData').textContent = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Manaus' });
+buscarVagas();
+</script>
+</body>
+</html>
