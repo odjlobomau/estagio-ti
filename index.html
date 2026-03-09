@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Estágios em TI — Manaus/AM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:         #07090f;
+  --bg2:        #0c1018;
+  --surface:    rgba(255,255,255,0.04);
+  --surface2:   rgba(255,255,255,0.07);
+  --border:     rgba(255,255,255,0.07);
+  --border2:    rgba(255,255,255,0.13);
+  --accent:     #4fffb0;
+  --accent-dim: rgba(79,255,176,0.12);
+  --accent-glo: rgba(79,255,176,0.25);
+  --blue:       #5b9dff;
+  --blue-dim:   rgba(91,157,255,0.12);
+  --purple:     #b87dff;
+  --purple-dim: rgba(184,125,255,0.12);
+  --yellow:     #ffcb47;
+  --yellow-dim: rgba(255,203,71,0.12);
+  --red-dim:    rgba(255,94,125,0.1);
+  --text:       #f0f4ff;
+  --text-soft:  #8b96b0;
+  --text-muted: #4a5468;
+  --r:          14px;
+  --r-sm:       8px;
+  --r-lg:       20px;
+  --font:       'Outfit', sans-serif;
+  --mono:       'DM Mono', monospace;
+  --ease:       0.2s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="light"] {
+  --bg:         #f4f7ff;
+  --bg2:        #edf1fb;
+  --surface:    rgba(255,255,255,0.9);
+  --surface2:   rgba(255,255,255,1);
+  --border:     rgba(0,0,0,0.07);
+  --border2:    rgba(0,0,0,0.13);
+  --text:       #0d1117;
+  --text-soft:  #4a5468;
+  --text-muted: #8b96b0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);background:var(--bg);color:var(--text);
+  min-height:100vh;transition:background var(--ease),color var(--ease);
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(79,255,176,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(79,255,176,0.025) 1px,transparent 1px);
+  background-size:44px 44px;pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';position:fixed;top:-200px;left:50%;transform:translateX(-50%);
+  width:800px;height:400px;
+  background:radial-gradient(ellipse,rgba(79,255,176,0.07) 0%,transparent 65%);
+  pointer-events:none;z-index:0;
+}
+[data-theme="light"] body::before,[data-theme="light"] body::after{display:none}
+*{position:relative;z-index:1}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* ── HEADER ── */
+header{
+  position:sticky;top:0;z-index:200;
+  background:rgba(7,9,15,.85);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+[data-theme="light"] header{background:rgba(244,247,255,.92)}
+.hinner{
+  max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;height:60px;gap:1rem;
+}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.logo-mark{
+  width:32px;height:32px;border-radius:9px;
+  background:linear-gradient(135deg,var(--accent),var(--blue));
+  display:grid;place-items:center;font-size:15px;
+  box-shadow:0 0 16px rgba(79,255,176,.3);
+}
+.logo-name{font-size:.95rem;font-weight:700;color:var(--text);letter-spacing:-.3px}
+.logo-name em{font-style:normal;color:var(--accent)}
+.hright{display:flex;align-items:center;gap:8px}
+
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:0 14px;height:34px;border-radius:99px;
+  font-family:var(--font);font-size:.82rem;font-weight:600;
+  cursor:pointer;transition:all var(--ease);border:1px solid;white-space:nowrap;
+}
+.pill-ghost{background:var(--surface);border-color:var(--border2);color:var(--text-soft)}
+.pill-ghost:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.pill-accent{background:var(--accent-dim);border-color:var(--accent-glo);color:var(--accent)}
+.pill-accent:hover{background:var(--accent);color:var(--bg)}
+.pill-accent:disabled{opacity:.45;cursor:not-allowed}
+.spin{display:inline-block;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── HERO ── */
+.hero{max-width:1280px;margin:0 auto;padding:3rem 2rem 2rem}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:.72rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--accent);font-family:var(--mono);margin-bottom:.9rem;
+}
+.eyebrow::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 8px var(--accent);animation:blink 2s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{
+  font-size:clamp(2rem,5vw,3.5rem);font-weight:900;
+  letter-spacing:-1.5px;line-height:1.1;margin-bottom:1rem;
+}
+.grad{
+  background:linear-gradient(135deg,var(--accent) 0%,var(--blue) 50%,var(--purple) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 12px;border-radius:99px;
+  font-size:.73rem;font-weight:600;font-family:var(--mono);border:1px solid;
+}
+.tg{background:var(--surface);color:var(--text-soft);border-color:var(--border2)}
+.tg-g{background:var(--accent-dim);color:var(--accent);border-color:var(--accent-glo)}
+.tg-b{background:var(--blue-dim);color:var(--blue);border-color:rgba(91,157,255,.3)}
+
+/* ── STATS ── */
+.stats{
+  max-width:1280px;margin:0 auto 2rem;padding:0 2rem;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+}
+.stat{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:1.1rem 1.25rem;transition:all var(--ease);overflow:hidden;
+}
+.stat::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  border-radius:2px 2px 0 0;opacity:0;transition:opacity var(--ease);
+}
+.stat:hover{border-color:var(--border2);background:var(--surface2)}
+.stat:hover::before{opacity:1}
+.sa::before{background:var(--accent)}
+.sb::before{background:var(--blue)}
+.sc::before{background:var(--accent)}
+.sd::before{background:var(--yellow)}
+.stat-lbl{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
+.stat-n{font-size:2rem;font-weight:900;line-height:1;font-family:var(--mono)}
+.sa .stat-n{color:var(--accent)}.sb .stat-n{color:var(--blue)}
+.sc .stat-n{color:var(--accent)}.sd .stat-n{color:var(--yellow)}
+
+/* ── FILTERS ── */
+.filters{max-width:1280px;margin:0 auto 1.5rem;padding:0 2rem}
+.ftop{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:1rem}
+.field{display:flex;flex-direction:column;gap:5px}
+.flbl{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted)}
+.iw{position:relative}
+.iw svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);pointer-events:none}
+input[type="text"]{
+  background:var(--surface);border:1px solid var(--border2);border-radius:var(--r-sm);
+  color:var(--text);padding:8px 12px 8px 34px;font-family:var(--font);font-size:.875rem;
+  width:240px;transition:all var(--ease);
+}
+input[type="text"]::placeholder{color:var(--text-muted)}
+input[type="text"]:focus{outline:none;border-color:var(--accent);background:var(--surface2);box-shadow:0 0 0 3px var(--accent-dim)}
+.sw{position:relative}
+.sw::after{
+  content:'';pointer-events:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  border:4px solid transparent;border-top:5px solid var(--text-muted);
+}
+select{
+  background:var(--surface);border:1px solid var(--border2);border-radius:var(--r-sm);
+  color:var(--text);padding:8px 30px 8px 12px;font-family:var(--font);font-size:.875rem;
+  cursor:pointer;appearance:none;-webkit-appearance:none;transition:all var(--ease);
+}
+select:focus{outline:none;border-color:var(--accent);background:var(--surface2)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{
+  padding:5px 14px;border-radius:99px;border:1px solid var(--border2);
+  background:var(--surface);color:var(--text-soft);cursor:pointer;
+  font-size:.8rem;font-weight:600;transition:all var(--ease);
+}
+.chip:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.chip.on{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:700}
+.fbot{display:flex;align-items:center;justify-content:space-between;margin-top:1rem;flex-wrap:wrap;gap:8px}
+.rcount{font-size:.82rem;color:var(--text-muted);font-family:var(--mono)}
+.rcount strong{color:var(--text-soft);font-weight:600}
+.bclear{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.8rem;font-family:var(--font);font-weight:600;transition:color var(--ease);padding:0}
+.bclear:hover{color:#ff5e7d}
+
+/* ── LOADING ── */
+.loading{max-width:1280px;margin:4rem auto;padding:0 2rem;text-align:center;display:none}
+.loading.show{display:block}
+.lring{
+  width:44px;height:44px;margin:0 auto 1.5rem;
+  border:3px solid var(--border2);border-top-color:var(--accent);
+  border-radius:50%;animation:spin .9s linear infinite;
+}
+.ltitle{font-size:1rem;font-weight:600;color:var(--text-soft);margin-bottom:1rem}
+.lsteps{display:flex;flex-direction:column;gap:6px;align-items:center}
+.ls{font-family:var(--mono);font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:6px}
+.ls.active{color:var(--accent)}.ls.done{color:var(--accent);opacity:.55}
+
+/* ── ERROR ── */
+.ebox{
+  max-width:600px;margin:2rem auto;padding:1.25rem 1.5rem;
+  background:var(--red-dim);border:1px solid rgba(255,94,125,.2);
+  border-radius:var(--r);color:#ffaab8;font-size:.88rem;text-align:center;display:none;
+}
+.ebox.show{display:block}
+.eicon{font-size:1.5rem;display:block;margin-bottom:6px}
+
+/* ── GRID ── */
+.grid{
+  max-width:1280px;margin:0 auto;padding:0 2rem 4rem;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px;
+}
+.empty{grid-column:1/-1;text-align:center;padding:4rem 2rem;color:var(--text-muted)}
+.eico{font-size:2.5rem;display:block;margin-bottom:.75rem}
+
+/* ── CARD ── */
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:1.3rem;display:flex;flex-direction:column;gap:1rem;
+  transition:all var(--ease);animation:fadeUp .35s ease both;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent-glo),transparent);
+  opacity:0;transition:opacity var(--ease);
+}
+.card:hover{
+  border-color:var(--border2);background:var(--surface2);
+  transform:translateY(-3px);
+  box-shadow:0 16px 48px rgba(0,0,0,.4),0 0 0 1px var(--border2);
+}
+.card:hover::before{opacity:1}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.ctop{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.ctitle{font-size:.95rem;font-weight:700;line-height:1.35;color:var(--text);flex:1}
+.mpill{
+  flex-shrink:0;padding:3px 10px;border-radius:99px;
+  font-size:.68rem;font-weight:700;font-family:var(--mono);border:1px solid;letter-spacing:.04em;
+}
+.mp-p{background:var(--accent-dim);color:var(--accent);border-color:var(--accent-glo)}
+.mp-r{background:var(--blue-dim);color:var(--blue);border-color:rgba(91,157,255,.3)}
+.mp-h{background:var(--yellow-dim);color:var(--yellow);border-color:rgba(255,203,71,.3)}
+
+.crow{display:flex;align-items:center;gap:10px}
+.av{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  display:grid;place-items:center;font-weight:800;font-size:.88rem;color:#fff;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+}
+.cname{font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.cloc{font-size:.72rem;color:var(--text-muted);margin-top:1px}
+
+.cdesc{
+  font-size:.82rem;color:var(--text-soft);line-height:1.6;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.reqs{display:flex;flex-wrap:wrap;gap:5px}
+.req{
+  padding:3px 9px;border-radius:6px;font-size:.7rem;font-weight:600;font-family:var(--mono);
+  background:var(--purple-dim);color:var(--purple);border:1px solid rgba(184,125,255,.2);
+}
+.cfoot{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding-top:.875rem;border-top:1px solid var(--border);flex-wrap:wrap;
+}
+.csrc{font-size:.72rem;font-family:var(--mono);color:var(--text-muted)}
+.cbtns{display:flex;gap:6px}
+.bsm{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 11px;border-radius:var(--r-sm);
+  font-size:.75rem;font-weight:700;font-family:var(--font);
+  cursor:pointer;transition:all var(--ease);border:1px solid;text-decoration:none;
+}
+.bv{background:var(--accent-dim);color:var(--accent);border-color:var(--accent-glo)}
+.bv:hover{background:var(--accent);color:var(--bg)}
+.bw{background:rgba(37,211,102,.1);color:#25d366;border-color:rgba(37,211,102,.25)}
+.bw:hover{background:#25d366;color:#fff}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;font-size:.78rem;color:var(--text-muted)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .hinner,.hero,.stats,.filters,.grid{padding-left:1rem;padding-right:1rem}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}
+  .logo-name{display:none}
+  input[type="text"]{width:150px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hinner">
+    <a href="#" class="logo">
+      <div class="logo-mark">⌨</div>
+      <span class="logo-name">Estágios TI <em>Manaus</em></span>
+    </a>
+    <div class="hright">
+      <button class="pill pill-ghost" onclick="toggleTheme()" id="btnTheme">🌙 Tema</button>
+      <button class="pill pill-accent" id="btnRefresh" onclick="buscarVagas()">
+        <span id="rIcon">↻</span><span id="rText">Atualizar</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Atualizado automaticamente por IA</div>
+  <h1>Vagas de Estágio em<br><span class="grad">TI &amp; Computação</span></h1>
+  <div class="hero-meta">
+    <span class="tag tg">📍 Manaus, AM</span>
+    <span class="tag tg-g" id="tagStatus">● Buscando…</span>
+    <span class="tag tg-b" id="tagTotal">— vagas</span>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat sa"><div class="stat-lbl">Total de vagas</div><div class="stat-n" id="sTotal">—</div></div>
+  <div class="stat sb"><div class="stat-lbl">Empresas</div><div class="stat-n" id="sEmp">—</div></div>
+  <div class="stat sc"><div class="stat-lbl">Presenciais</div><div class="stat-n" id="sPres">—</div></div>
+  <div class="stat sd"><div class="stat-lbl">Remotas</div><div class="stat-n" id="sRem">—</div></div>
+</div>
+
+<div class="filters">
+  <div class="ftop">
+    <div class="field">
+      <span class="flbl">Pesquisar</span>
+      <div class="iw">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="qS" placeholder="Cargo, empresa, tecnologia…" oninput="applyFilter()"/>
+      </div>
+    </div>
+    <div class="field">
+      <span class="flbl">Modalidade</span>
+      <div class="sw"><select id="qM" onchange="applyFilter()">
+        <option value="">Todas</option>
+        <option>Presencial</option><option>Remoto</option><option>Híbrido</option>
+      </select></div>
+    </div>
+    <div class="field">
+      <span class="flbl">Fonte</span>
+      <div class="sw"><select id="qF" onchange="applyFilter()">
+        <option value="">Todas as fontes</option>
+      </select></div>
+    </div>
+  </div>
+  <div>
+    <div class="flbl" style="margin-bottom:8px">Área de atuação</div>
+    <div class="chips" id="chips">
+      <div class="chip on" data-v="" onclick="pickArea(this)">Todas</div>
+      <div class="chip" data-v="Desenvolvimento" onclick="pickArea(this)">Desenvolvimento</div>
+      <div class="chip" data-v="Testes" onclick="pickArea(this)">Testes</div>
+      <div class="chip" data-v="Infraestrutura" onclick="pickArea(this)">Infraestrutura</div>
+      <div class="chip" data-v="Design/UX" onclick="pickArea(this)">Design / UX</div>
+      <div class="chip" data-v="Dados" onclick="pickArea(this)">Dados</div>
+      <div class="chip" data-v="Suporte" onclick="pickArea(this)">Suporte</div>
+      <div class="chip" data-v="Pesquisa" onclick="pickArea(this)">Pesquisa</div>
+    </div>
+  </div>
+  <div class="fbot">
+    <span class="rcount" id="qCount"></span>
+    <button class="bclear" onclick="clearF()">✕ Limpar filtros</button>
+  </div>
+</div>
+
+<div class="loading" id="loadBox">
+  <div class="lring"></div>
+  <div class="ltitle">🤖 IA pesquisando vagas em tempo real…</div>
+  <div class="lsteps">
+    <div class="ls active" id="ls1">▸ Conectando ao Google Search</div>
+    <div class="ls" id="ls2">▸ Buscando no LinkedIn, Indeed, CIEE…</div>
+    <div class="ls" id="ls3">▸ Organizando resultados</div>
+  </div>
+</div>
+
+<div class="ebox" id="errBox">
+  <span class="eicon">⚠️</span>
+  <span id="errMsg"></span>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer>
+  Dados via IA + Google Search &nbsp;·&nbsp; Atualizado automaticamente &nbsp;·&nbsp; <span id="fDate"></span>
+</footer>
+
+<script>
+let all=[], area='';
+
+function toggleTheme(){
+  const d=document.documentElement;
+  const light=d.getAttribute('data-theme')==='dark';
+  d.setAttribute('data-theme',light?'light':'dark');
+  document.getElementById('btnTheme').textContent=light?'🌙 Tema':'☀️ Tema';
+}
+
+function pickArea(el){
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on'); area=el.dataset.v; applyFilter();
+}
+
+function applyFilter(){
+  const q=document.getElementById('qS').value.toLowerCase();
+  const m=document.getElementById('qM').value;
+  const f=document.getElementById('qF').value;
+  const r=all.filter(v=>
+    (!q||[v.titulo,v.empresa,v.descricao].join(' ').toLowerCase().includes(q))&&
+    (!m||v.modalidade===m)&&(!f||v.fonte===f)&&(!area||v.area===area)
+  );
+  renderCards(r);
+  document.getElementById('qCount').innerHTML=
+    `<strong>${r.length}</strong> vaga${r.length!==1?'s':''} encontrada${r.length!==1?'s':''}`;
+}
+
+function clearF(){
+  document.getElementById('qS').value='';
+  document.getElementById('qM').value='';
+  document.getElementById('qF').value='';
+  area='';
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  document.querySelector('.chip[data-v=""]').classList.add('on');
+  applyFilter();
+}
+
+function renderCards(vagas){
+  const g=document.getElementById('grid');
+  if(!vagas.length){
+    g.innerHTML=`<div class="empty"><span class="eico">🔎</span>Nenhuma vaga com esses filtros.</div>`;
+    return;
+  }
+  g.innerHTML=vagas.map((v,i)=>{
+    const mc={'Presencial':'mp-p','Remoto':'mp-r','Híbrido':'mp-h'}[v.modalidade]||'mp-p';
+    const ini=(v.empresa||'?')[0].toUpperCase();
+    const reqs=(v.requisitos||[]).slice(0,4).map(r=>`<span class="req">${r}</span>`).join('');
+    const bv=v.link?`<a href="${v.link}" target="_blank" rel="noopener" class="bsm bv">🔗 Ver vaga</a>`:'';
+    const wa=encodeURIComponent(`🎓 *Estágio em TI – Manaus*\n\n*${v.titulo}*\n🏢 ${v.empresa}\n📍 ${v.local||'Manaus, AM'} · ${v.modalidade}\n\n${v.descricao||''}\n\n${v.link?'🔗 '+v.link:''}`);
+    return `<div class="card" style="animation-delay:${i*.04}s">
+      <div class="ctop">
+        <div class="ctitle">${v.titulo}</div>
+        <span class="mpill ${mc}">${v.modalidade||'Presencial'}</span>
+      </div>
+      <div class="crow">
+        <div class="av">${ini}</div>
+        <div><div class="cname">${v.empresa}</div><div class="cloc">📍 ${v.local||'Manaus, AM'}</div></div>
+      </div>
+      ${v.descricao?`<div class="cdesc">${v.descricao}</div>`:''}
+      ${reqs?`<div class="reqs">${reqs}</div>`:''}
+      <div class="cfoot">
+        <span class="csrc">📌 ${v.fonte||'Web'}${v.data_publicacao?' · '+v.data_publicacao:''}</span>
+        <div class="cbtns">${bv}<a href="https://wa.me/?text=${wa}" target="_blank" class="bsm bw">📲 Compartilhar</a></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateStats(vagas){
+  document.getElementById('sTotal').textContent=vagas.length;
+  document.getElementById('sEmp').textContent=new Set(vagas.map(v=>v.empresa)).size;
+  document.getElementById('sPres').textContent=vagas.filter(v=>v.modalidade==='Presencial').length;
+  document.getElementById('sRem').textContent=vagas.filter(v=>v.modalidade==='Remoto').length;
+  document.getElementById('tagTotal').textContent=`${vagas.length} vagas ativas`;
+  const fontes=[...new Set(vagas.map(v=>v.fonte).filter(Boolean))];
+  document.getElementById('qF').innerHTML='<option value="">Todas as fontes</option>'+fontes.map(f=>`<option>${f}</option>`).join('');
+}
+
+async function animSteps(){
+  const ids=['ls1','ls2','ls3'];
+  const lbs=['Conectando ao Google Search','Buscando no LinkedIn, Indeed, CIEE…','Organizando resultados'];
+  for(let i=0;i<ids.length;i++){
+    await new Promise(r=>setTimeout(r,1300));
+    const el=document.getElementById(ids[i]);
+    el.classList.remove('active');el.classList.add('done');
+    el.textContent='✓ '+lbs[i];
+    if(i+1<ids.length)document.getElementById(ids[i+1]).classList.add('active');
+  }
+}
+
+async function buscarVagas(){
+  const btn=document.getElementById('btnRefresh');
+  const ri=document.getElementById('rIcon');
+  const rt=document.getElementById('rText');
+  btn.disabled=true;ri.className='spin';ri.textContent='↻';rt.textContent='Buscando…';
+  ['ls1','ls2','ls3'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.className='ls'+(i===0?' active':'');
+    el.textContent='▸ '+['Conectando ao Google Search','Buscando no LinkedIn, Indeed, CIEE…','Organizando resultados'][i];
+  });
+  document.getElementById('loadBox').classList.add('show');
+  document.getElementById('errBox').classList.remove('show');
+  document.getElementById('grid').innerHTML='';
+  ['sTotal','sEmp','sPres','sRem'].forEach(id=>document.getElementById(id).textContent='—');
+  document.getElementById('tagStatus').textContent='● Buscando…';
+  animSteps();
+  try{
+    const res=await fetch('/api/buscar-vagas');
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    all=data.vagas||[];
+    updateStats(all);applyFilter();
+    document.getElementById('tagStatus').textContent=`● Atualizado ${data.data_atualizacao||'hoje'}`;
+  }catch(e){
+    document.getElementById('errBox').classList.add('show');
+    document.getElementById('errMsg').textContent=`Erro: ${e.message}. Verifique se a GEMINI_API_KEY está configurada no Vercel.`;
+  }finally{
+    document.getElementById('loadBox').classList.remove('show');
+    btn.disabled=false;ri.className='';ri.textContent='↻';rt.textContent='Atualizar';
+  }
+}
+
+document.getElementById('fDate').textContent=new Date().toLocaleDateString('pt-BR',{timeZone:'America/Manaus'});
+buscarVagas();
+</script>
+</body>
+</html>

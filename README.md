@@ -1,79 +1,66 @@
-# 🎓 Estágios em TI — Manaus/AM
+# 🎓 Estágios em TI — Manaus/AM (Vercel)
 
 Painel automático de vagas de estágio em TI/Computação em Manaus, com busca em tempo real via IA (Google Gemini + Google Search).
-
-## ✨ Funcionalidades
-
-- 🤖 Busca automática ao abrir a página (Gemini + Google Search)
-- 🔍 Filtros por área, modalidade, fonte e busca textual
-- 📲 Compartilhamento via WhatsApp de cada vaga
-- 🌙 Dark mode / Light mode
-- 📱 Responsivo para mobile
-
----
-
-## 🚀 Deploy no Netlify (Passo a Passo)
-
-### 1. Subir o projeto no GitHub
-
-1. Crie um repositório no [GitHub](https://github.com/new)
-2. Faça upload de todos os arquivos deste projeto
-
-### 2. Conectar ao Netlify
-
-1. Acesse [netlify.com](https://netlify.com) e faça login
-2. Clique em **"Add new site" → "Import an existing project"**
-3. Escolha **GitHub** e selecione o repositório
-4. As configurações de build serão detectadas automaticamente pelo `netlify.toml`
-5. Clique em **"Deploy site"**
-
-### 3. Configurar a API Key do Gemini
-
-1. Obtenha sua chave em [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) (gratuito)
-2. No painel do Netlify, vá em:
-   **Site settings → Environment variables → Add a variable**
-3. Configure:
-   - **Key:** `GEMINI_API_KEY`
-   - **Value:** `sua-chave-aqui`
-4. Clique em **Save**
-5. Vá em **Deploys → Trigger deploy** para redeployar com a variável
-
----
 
 ## 📁 Estrutura do Projeto
 
 ```
 estagio-ti-manaus/
-├── public/
-│   └── index.html          ← Página principal
-├── netlify/
-│   └── functions/
-│       └── buscar-vagas.js ← Serverless function (chama Gemini API)
-├── netlify.toml            ← Configuração do Netlify
-├── package.json
+├── api/
+│   └── buscar-vagas.js   ← Serverless function (Vercel)
+├── index.html             ← Página principal
+├── vercel.json            ← Configuração do Vercel
 └── README.md
 ```
+
+---
+
+## 🚀 Deploy no Vercel (Passo a Passo)
+
+### 1. Subir no GitHub
+
+1. Crie um repositório em [github.com](https://github.com/new)
+2. Faça upload de **todos os arquivos** diretamente na raiz do repositório
+   - `api/buscar-vagas.js`
+   - `index.html`
+   - `vercel.json`
+   - `README.md`
+
+> ⚠️ **Importante:** Os arquivos devem estar na **raiz** do repositório, não dentro de subpastas.
+
+### 2. Conectar ao Vercel
+
+1. Acesse [vercel.com](https://vercel.com) e faça login com GitHub
+2. Clique em **"Add New Project"**
+3. Selecione o repositório
+4. Clique em **"Deploy"**
+
+### 3. Configurar a API Key do Gemini
+
+1. Obtenha sua chave gratuitamente em [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+2. No painel do Vercel, vá em:
+   **Project Settings → Environment Variables**
+3. Adicione:
+   - **Name:** `GEMINI_API_KEY`
+   - **Value:** `sua-chave-aqui`
+   - **Environment:** Production, Preview, Development (marque todos)
+4. Clique em **Save**
+5. Vá em **Deployments → Redeploy** para aplicar
+
+---
+
+## 💰 Custos
+
+- **Vercel:** Gratuito (plano Hobby)
+- **Gemini API:** Gratuito até 1.500 requisições/dia
 
 ---
 
 ## 🔧 Testar Localmente
 
 ```bash
-npm install
-npx netlify dev
+npm i -g vercel
+vercel dev
 ```
 
-Acesse: http://localhost:8888
-
----
-
-## 💰 Custos
-
-- **Netlify:** Gratuito (plano Free)
-- **Gemini API:** Gratuito até 1.500 requisições/dia (Flash model)
-
----
-
-## 📬 Contato
-
-Desenvolvido para estudantes de TI em Manaus, AM.
+Acesse: http://localhost:3000
