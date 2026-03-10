@@ -1,11 +1,8 @@
 {
   "name": "estagio-ti-manaus",
   "version": "1.0.0",
-  "description": "Painel de vagas de estágio em TI em Manaus/AM com busca automática via IA",
-  "scripts": {
-    "dev": "netlify dev"
-  },
-  "devDependencies": {
-    "netlify-cli": "^17.0.0"
+  "private": true,
+  "engines": {
+    "node": "18.x"
   }
 }

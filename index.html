@@ -522,7 +522,7 @@ async function buscarVagas(){
     document.getElementById('tagStatus').textContent=`● Atualizado ${data.data_atualizacao||'hoje'}`;
   }catch(e){
     document.getElementById('errBox').classList.add('show');
-    document.getElementById('errMsg').textContent=`Erro: ${e.message}. Verifique se a GEMINI_API_KEY está configurada no Vercel.`;
+    document.getElementById('errMsg').textContent=`Erro ao buscar vagas: ${e.message}. Verifique se a GEMINI_API_KEY está configurada no Vercel (Project Settings → Environment Variables).`;
   }finally{
     document.getElementById('loadBox').classList.remove('show');
     btn.disabled=false;ri.className='';ri.textContent='↻';rt.textContent='Atualizar';
