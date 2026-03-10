@@ -48,13 +48,13 @@ Traga o máximo de vagas reais que encontrar (mínimo 5, idealmente 10-20). Se n
 
   try {
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          tools: [{ google_search: {} }],
+          tools: [{ googleSearch: {} }],
           generationConfig: {
             temperature: 0.2,
             maxOutputTokens: 8192,
